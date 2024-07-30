@@ -29,7 +29,7 @@ else if "%first_char%"=="\" (
 	if "%file_path:~16,6%"=="Ubuntu" goto ProcessUbuntuFilePath
 	if "%file_path:~16,14%"=="docker-desktop" goto ProcessDockerDesktopFilePath
 	if "%file_path:~16,19%"=="docker-desktop-data" goto ProcessDockerDesktopDataFilePath
-  else goto ProcessYourDistroFilePath
+  goto ProcessYourDistroFilePath
 )
 
 goto End
