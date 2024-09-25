@@ -1,5 +1,4 @@
-
-@echo off
+@echo off & setlocal DisableDelayedExpansion
 
 rem Get file address
 set "file_address=%~1"
@@ -87,19 +86,21 @@ set "ready_dir_path=/%real_dir_path%"
 
 :End
 
-rem Set command to change directory and open file in nvim
-rem "command=cd \"%ready_dir_path%\" && nvim \"%ready_file_path%\""
-rem set "command=cd \"%ready_dir_path%\""
-set "command=nvim \"%ready_file_path%\""
+rem Set command to open a tmux session that redirects to file directory and opens the file in nvim
+rem If you dont use tmux uncomment this line
+rem "command=source ~/.zshrc; cd \"%ready_dir_path%\"; $(which nvim) \"%ready_file_path%\""
+
+rem If you use tmux, keep this line uncommented
+set "command=source ~/.zshrc; $(which tmux) new 'cd \"%ready_dir_path%\"; $(which nvim) \"%ready_file_path%\"'"
 
 rem Copy file & directory path into clipboard
 rem echo "%first_char%" | clip
 rem echo "%ready_file_path%" | clip
 rem echo "%ready_dir_path%" | clip
 rem echo "%command%" | clip
-
 echo "%ready_file_path%" | clip
 
 rem Launch ubuntu.exe with cmd.exe commands
 rem Edit `ubuntu.exe` to your distro command. (Eg. debian.exe, etc.)
+echo "Run Ubuntu"
 start "" ubuntu.exe run %command%
