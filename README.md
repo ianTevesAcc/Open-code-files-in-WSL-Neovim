@@ -16,6 +16,10 @@ This is a batch file script that allows WSL Windows users to open their code fil
 ###### Update
 The script is now configured to run a tmux session in the terminal session. This enables terminal use during session, enabling the ability to exit neovim without terminating the terminal shell session. 
 
+<<<<<<< HEAD
 *note... if you dont want to use a tmux session or do not have tmux enabled in your system, you can disable behaviour by removing commenting out line 93 `set "command=source ~/.zshrc; $(which tmux) new 'cd \"%ready_dir_path%\"; $(which nvim) \"%ready_file_path%\"'"` and uncomment line line 90 `rem "command=source ~/.zshrc; cd \"%ready_dir_path%\"; $(which nvim) \"%ready_file_path%\""`. by removing `rem` to uncomment and to add rem to comment out a line.
 
 Testing...
+=======
+*note... if you dont want to use a tmux session or do not have tmux enabled in your system; You can disable this behaviour by removing commenting out line 93 `set "command=source ~/.zshrc; $(which tmux) new 'cd \"%ready_dir_path%\"; $(which nvim) \"%ready_file_path%\"'"` and by uncommenting line line 90 `rem "command=source ~/.zshrc; cd \"%ready_dir_path%\"; $(which nvim) \"%ready_file_path%\""`. by removing `rem` to uncomment and to add rem to comment out a line.*
+>>>>>>> 833d80b1eee82d16e82c228aad0bb638b780ff61
