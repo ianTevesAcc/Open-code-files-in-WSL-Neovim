@@ -30,7 +30,6 @@ else if "%first_char%"=="\" (
 	if "%file_path:~16,19%"=="docker-desktop-data" goto ProcessDockerDesktopDataFilePath
   goto ProcessYourDistroFilePath
 )
-
 goto End
 
 rem Clean up file path
