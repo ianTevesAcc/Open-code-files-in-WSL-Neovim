@@ -12,3 +12,8 @@ This is a batch file script that allows WSL Windows users to open their code fil
     - scroll down and select `choose an app on your pc`
     - head to where you saved `open_with_nvim.bat` file path and select the `.bat` script file.
 5. Your code file should now open in your wsl distro in neovim.
+
+###### Update
+The script is now configured to run a tmux session in the terminal session. This enables terminal use during session, enabling the ability to exit neovim without terminating the terminal shell session. 
+
+*note... if you dont want to use a tmux session or do not have tmux enabled in your system, you can disable behaviour by removing commenting out line 93 `set "command=source ~/.zshrc; $(which tmux) new 'cd \"%ready_dir_path%\"; $(which nvim) \"%ready_file_path%\"'"` and uncomment line line 90 `rem "command=source ~/.zshrc; cd \"%ready_dir_path%\"; $(which nvim) \"%ready_file_path%\""`. by removing `rem` to uncomment and to add rem to comment out a line.
