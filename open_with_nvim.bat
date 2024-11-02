@@ -18,16 +18,16 @@ if "%dir_path:~-1%"=="\" set "dir_path=%dir_path:~0,-1%"
 rem Check the first character of the file path
 set "first_char=%file_path:~0,1%"
 
-rem Filter for which Drive type the file path is
+rem Filter for which Drive the file path is
 if "%first_char%"=="C" goto ProcessWindowsFilePath
 if "%first_char%"=="D" goto ProcessWindowsFilePath
 if "%first_char%"=="E" goto ProcessWindowsFilePath
 if "%first_char%"=="F" goto ProcessWindowsFilePath
 if "%first_char%"=="G" goto ProcessWindowsFilePath
 else if "%first_char%"=="\" (
-	if "%file_path:~16,6%"=="Ubuntu" goto ProcessUbuntuFilePath
-	if "%file_path:~16,14%"=="docker-desktop" goto ProcessDockerDesktopFilePath
-	if "%file_path:~16,19%"=="docker-desktop-data" goto ProcessDockerDesktopDataFilePath
+  if "%file_path:~16,6%"=="Ubuntu" goto ProcessUbuntuFilePath
+  if "%file_path:~16,14%"=="docker-desktop" goto ProcessDockerDesktopFilePath
+  if "%file_path:~16,19%"=="docker-desktop-data" goto ProcessDockerDesktopDataFilePath
   goto ProcessYourDistroFilePath
 )
 goto End
@@ -37,9 +37,27 @@ rem Clean up file path
 rem Remove first 2 characters (assuming it's the drive letter and backslash)
 set "real_file_path=%file_path:~2%"
 set "real_dir_path=%dir_path:~2%"
-rem Prepend /mnt/c/ to the paths to properly reference the Windows drive in WSL
-set "ready_file_path=/mnt/c%real_file_path%"
-set "ready_dir_path=/mnt/c%real_dir_path%"
+rem Prepend /mnt/drive path/ to the paths to properly reference the Windows drive in WSL
+if "%first_char%"=="C" (
+  set "ready_file_path=/mnt/c%real_file_path%"
+  set "ready_dir_path=/mnt/c%real_dir_path%"
+)
+if "%first_char%"=="D" (
+  set "ready_file_path=/mnt/d%real_file_path%"
+  set "ready_dir_path=/mnt/d%real_dir_path%"
+)
+if "%first_char%"=="E" (
+  set "ready_file_path=/mnt/e%real_file_path%"
+  set "ready_dir_path=/mnt/e%real_dir_path%"
+)
+if "%first_char%"=="F" (
+  set "ready_file_path=/mnt/f%real_file_path%"
+  set "ready_dir_path=/mnt/f%real_dir_path%"
+)
+if "%first_char%"=="G" (
+  set "ready_file_path=/mnt/g%real_file_path%"
+  set "ready_dir_path=/mnt/g%real_dir_path%"
+)
 goto End
 
 :ProcessUbuntuFilePath
@@ -71,12 +89,12 @@ goto End
 
 rem Your Distro Config Here
 :ProcessYourDistroFilePath
-rem Here we want to remove the first characters of the file path as they are set as the Windows file path. 
-rem To do this were gonna be removing the first 16 characters which is `\\wsl.localhost`. 
-rem Then we need to remove the amount of character of your distro file path name. 
+rem Here we want to remove the first characters of the file path as they are set as the Windows file path.
+rem To do this were gonna be removing the first 16 characters which is `\\wsl.localhost`.
+rem Then we need to remove the amount of character of your distro file path name.
 rem Eg. If you installed debian we need to remove an additional 6 characters.
 rem So we need to remove a total of 16+6+1 = 22 characters. (The plus 1 is the extra /)
-rem So in the following you need to edit the number in`%file_path:~00% underneath, in order to suit your distro file path.` 
+rem So in the following you need to edit the number in`%file_path:~00% underneath, in order to suit your distro file path.`
 set "real_file_path=/%file_path:~00%"
 set "real_dir_path=/%dir_path:~00%"
 rem Then we want to Prepend / to the paths to reference them properly. (no edits needed here)
